@@ -29,7 +29,9 @@ main {
   width: 450px;
   margin: auto;
   position: relative;
-  top: 140px;
-  text-align: center;
+  overflow: auto;
+  padding: 140px 0 40px 0;
+  /* text-align: center; */
   background-color: white;
+  /* margin-top: 140px; */
 }
