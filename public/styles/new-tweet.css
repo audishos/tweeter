@@ -30,3 +30,7 @@
   margin: 0 10px;
   font-style: italic;
 }
+
+.invalid {
+  color: red;
+}
