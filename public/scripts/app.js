@@ -53,7 +53,7 @@ var data = [
 ];
 
 function createTweetElement(tweetData) {
-  return $(
+  return (
     `<article class="tweet">
       <header>
         <img class="avatar" src="${tweetData.user.avatars.regular}">
@@ -72,16 +72,12 @@ function createTweetElement(tweetData) {
         </div>
       </footer>
     </article>`
-  )
+  );
 }
 
 function renderTweets(tweets) {
-  // loops through tweets
-  for (tweet of tweets) {
-    // calls createTweetElement for each tweet
-    // takes return value and appends it to the tweets container
-    $("#tweet-container").append(createTweetElement(tweet));
-  }
+  let tweetsStr = tweets.map(createTweetElement).join('');
+  $("#tweet-container").append($(tweetsStr));
 }
 
 $(document).ready(function() {
