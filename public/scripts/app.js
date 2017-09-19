@@ -52,6 +52,12 @@ var data = [
   }
 ];
 
+function escape(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
 function createTweetElement(tweetData) {
   return (
     `<article class="tweet">
@@ -61,7 +67,7 @@ function createTweetElement(tweetData) {
         <span>${tweetData.user.handle}</span>
       </header>
       <article>
-        ${tweetData.content.text}
+        ${escape(tweetData.content.text)}
       </article>
       <footer>
         <span>${moment(tweetData.created_at).fromNow()}</span>
@@ -76,7 +82,7 @@ function createTweetElement(tweetData) {
 }
 
 function renderTweets(tweets) {
-  let tweetsStr = tweets.map(createTweetElement).join('');
+  let tweetsStr = tweets.reverse().map(createTweetElement).join('');
   $("#tweet-container").append($(tweetsStr));
 }
 
