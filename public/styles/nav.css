@@ -34,9 +34,9 @@
   width: 100px;
   color: #00a087;
   background-color: #E7FDFF;
-  font-weight: bold;
 }
 
 #compose:hover {
   background-color: white;
+  color: black;
 }
