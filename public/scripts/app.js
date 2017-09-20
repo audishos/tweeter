@@ -70,15 +70,14 @@ $(document).ready(function() {
   $("input").on("click", (ev) => {
     ev.preventDefault();
     $("#new-tweet p").remove();
-
+    let newTweet = $("#new-tweet form");
 
     if (!tweetText.val()) { // no tweet text
-      $("#new-tweet form").append("<p>Please enter some text into the box above!</p>");
+      newTweet.append("<p>Please enter some text into the box above!</p>");
     } else if (tweetText.val().length >= MAXCHARS) { // tweet too long
-      $("#new-tweet form").append("<p>Your tweet exceeds the maximum number of characters!</p>");
+      newTweet.append("<p>Your tweet exceeds the maximum number of characters!</p>");
     } else {
-      let formData = $("#new-tweet form").serialize();
-      submitTweet(formData);
+      submitTweet(newTweet.serialize());
     }
   });
 
