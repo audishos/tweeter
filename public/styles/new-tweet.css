@@ -34,3 +34,10 @@
 .invalid {
   color: red;
 }
+
+#new-tweet p {
+  clear: both;
+  color: red;
+  padding-left: 10px;
+  padding-top:  10px;
+}
