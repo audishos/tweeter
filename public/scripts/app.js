@@ -42,6 +42,7 @@ function createTweetElement(tweetData) {
 // then appends it to the #tweet container on the page
 function renderTweets(tweets) {
   let tweetsStr = tweets.reverse().map(createTweetElement).join('');
+  $("#tweet-container").empty();
   $("#tweet-container").prepend($(tweetsStr));
 }
 
