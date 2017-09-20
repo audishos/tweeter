@@ -21,3 +21,22 @@
   font-size: 2em;
   line-height: 62px;
 }
+
+#button-container {
+  float: right;
+  margin: 10px;
+}
+
+#compose {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 60px;
+  width: 100px;
+  color: #00a087;
+  background-color: #E7FDFF;
+  font-weight: bold;
+}
+
+#compose:hover {
+  background-color: white;
+}

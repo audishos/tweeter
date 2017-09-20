@@ -65,12 +65,12 @@ function loadTweets() {
 
 $(document).ready(function() {
   loadTweets();
+  let tweetText = $("#new-tweet textarea");
 
   $("input").on("click", (ev) => {
     ev.preventDefault();
     $("#new-tweet p").remove();
 
-    let tweetText = $("#new-tweet textarea");
 
     if (!tweetText.val()) { // no tweet text
       $("#new-tweet").append("<p>Please enter some text into the box above!</p>");
@@ -80,6 +80,11 @@ $(document).ready(function() {
       let formData = $("#new-tweet").serialize();
       submitTweet(formData);
     }
+  });
+
+  $("#compose").on("click", (ev) => {
+    $(".new-tweet").slideToggle();
+    tweetText.focus();
   });
 
 });
