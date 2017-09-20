@@ -1,4 +1,4 @@
-.new-tweet {
+#new-tweet {
   background-color: #eee;
   margin: 0 2em;
   overflow: auto;
@@ -7,20 +7,20 @@
   border-radius: 5px;
 }
 
-.new-tweet h2 {
+#new-tweet h2 {
   text-align: left;
   border-bottom: 2px solid;
   margin: 10px;
 }
 
-.new-tweet textarea {
+#new-tweet textarea {
   box-sizing: border-box;
   width: 364px;
   padding: 5px;
   margin: 0 10px;
 }
 
-.new-tweet input {
+#new-tweet input {
   float: left;
   margin: 0 10px;
 }

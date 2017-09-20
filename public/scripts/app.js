@@ -45,7 +45,7 @@ function renderTweets(tweets) {
 function submitTweet(newTweet) {
   $.post("/tweets", newTweet)
   .done((res) => {
-    $("#new-tweet").trigger("reset");
+    $("#new-tweet form").trigger("reset");
     loadTweets();
   })
   .fail((err) => {
@@ -73,17 +73,17 @@ $(document).ready(function() {
 
 
     if (!tweetText.val()) { // no tweet text
-      $("#new-tweet").append("<p>Please enter some text into the box above!</p>");
+      $("#new-tweet form").append("<p>Please enter some text into the box above!</p>");
     } else if (tweetText.val().length >= MAXCHARS) { // tweet too long
-      $("#new-tweet").append("<p>Your tweet exceeds the maximum number of characters!</p>");
+      $("#new-tweet form").append("<p>Your tweet exceeds the maximum number of characters!</p>");
     } else {
-      let formData = $("#new-tweet").serialize();
+      let formData = $("#new-tweet form").serialize();
       submitTweet(formData);
     }
   });
 
   $("#compose").on("click", (ev) => {
-    $(".new-tweet").slideToggle();
+    $("#new-tweet").slideToggle();
     tweetText.focus();
   });
 
