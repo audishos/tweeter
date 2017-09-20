@@ -50,6 +50,7 @@ function submitTweet(newTweet) {
   $.post("/tweets", newTweet)
   .done((res) => {
     $("#new-tweet form").trigger("reset");
+    $("#new-tweet .counter").text(MAXCHARS);
     loadTweets();
   })
   .fail((err) => {
