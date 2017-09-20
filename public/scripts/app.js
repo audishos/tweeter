@@ -4,16 +4,16 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// Fake data taken from tweets.json
-
 const MAXCHARS = 140;
 
+// escapes all characters in the given string
 function escape(str) {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
+// generates the html for a tweet object and returns it
 function createTweetElement(tweetData) {
   return (
     `<article class="tweet">
@@ -37,11 +37,15 @@ function createTweetElement(tweetData) {
   );
 }
 
+// iterates through an array of tweets,
+// sending them to the createTweetElement function,
+// then appends it to the #tweet container on the page
 function renderTweets(tweets) {
   let tweetsStr = tweets.reverse().map(createTweetElement).join('');
   $("#tweet-container").prepend($(tweetsStr));
 }
 
+// POSTs a serialized tweet to the /tweets route
 function submitTweet(newTweet) {
   $.post("/tweets", newTweet)
   .done((res) => {
@@ -53,6 +57,8 @@ function submitTweet(newTweet) {
   });
 }
 
+// GETs the tweets from the /tweets route,
+// then sends them to renderTweets to be displayed
 function loadTweets() {
   $.get("/tweets")
   .done((res) => {
@@ -65,25 +71,28 @@ function loadTweets() {
 
 $(document).ready(function() {
   loadTweets();
-  let tweetText = $("#new-tweet textarea");
+  const tweetTextArea = $("#new-tweet textarea");
 
-  $("input").on("click", (ev) => {
+  // event handler for the new tweet form
+  $("#new-tweet input").on("click", (ev) => {
     ev.preventDefault();
     $("#new-tweet p").remove();
-    let newTweet = $("#new-tweet form");
+    const newTweet = $("#new-tweet form");
+    const tweetText = tweetTextArea.val();
 
-    if (!tweetText.val()) { // no tweet text
+    if (!tweetText) { // no tweet text
       newTweet.append("<p>Please enter some text into the box above!</p>");
-    } else if (tweetText.val().length >= MAXCHARS) { // tweet too long
+    } else if (tweetText.length >= MAXCHARS) { // tweet too long
       newTweet.append("<p>Your tweet exceeds the maximum number of characters!</p>");
     } else {
       submitTweet(newTweet.serialize());
     }
   });
 
+  // event handler for the compose button
   $("#compose").on("click", (ev) => {
     $("#new-tweet").slideToggle();
-    tweetText.focus();
+    tweetTextArea.focus();
   });
 
 });

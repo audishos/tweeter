@@ -1,6 +1,5 @@
 $(document).ready(function() {
   $("#new-tweet textarea").on("keyup", function(event) {
-    const MAXCHARS = 140;
     let remainingChars = MAXCHARS - $(this).val().length;
     const counter = $(this).parent().children(".counter");
 
