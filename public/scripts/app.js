@@ -16,7 +16,7 @@ function escape(str) {
 // generates the html for a tweet object and returns it
 function createTweetElement(tweetData) {
   return (
-    `<article class="tweet">
+    `<article class="tweet" data-tweet-id="${tweetData._id}">
       <header>
         <img class="avatar" src="${tweetData.user.avatars.regular}">
         <h2>${tweetData.user.name}</h2>
@@ -28,6 +28,7 @@ function createTweetElement(tweetData) {
       <footer>
         <span>${moment(tweetData.created_at).fromNow()}</span>
         <div class="icons">
+          <span class="likes-counter">${(tweetData.likes ? tweetData.likes : 0)}</span>
           <i class="fa fa-flag"></i>
           <i class="fa fa-retweet"></i>
           <i class="fa fa-heart"></i>
@@ -71,6 +72,26 @@ function loadTweets() {
   });
 }
 
+function likeTweet(tweetId) {
+  $.ajax({ type: "PUT", url: `/tweets/${tweetId}/like` })
+  .done((res) => {
+    return;
+  })
+  .fail((err) => {
+    console.error(err);
+  });
+}
+
+function unlikeTweet(tweetId) {
+  $.ajax({ type: "PUT", url: `/tweets/${tweetId}/unlike` })
+  .done((res) => {
+    return;
+  })
+  .fail((err) => {
+    console.error(err);
+  });
+}
+
 $(document).ready(function() {
   loadTweets();
   const tweetTextArea = $("#new-tweet textarea");
@@ -95,6 +116,26 @@ $(document).ready(function() {
   $("#compose").on("click", (ev) => {
     $("#new-tweet").slideToggle();
     tweetTextArea.focus();
+  });
+
+  // event handler for clicking like
+  $("#tweet-container").on("click", ".fa-heart", (ev) => {
+
+    const selectedTweet = $(ev.target).closest(".tweet")
+    const selectedTweetId = selectedTweet.data("tweet-id");
+    const selectedLikesCounter = selectedTweet.find(".likes-counter");
+    const currentLikesCount = Number(selectedLikesCounter.text());
+
+    if (!selectedTweet.hasClass("liked")) { // add like
+      likeTweet(selectedTweetId);
+      selectedTweet.addClass("liked");
+      selectedLikesCounter.text(currentLikesCount + 1);
+    } else { // remove like
+      unlikeTweet(selectedTweetId);
+      selectedTweet.removeClass("liked");
+      selectedLikesCounter.text(currentLikesCount - 1);
+    }
+
   });
 
 });

@@ -3,6 +3,7 @@
 let db; // globally scope the db
 
 const {MongoClient} = require("mongodb");
+const ObjectId = require("mongodb").ObjectID;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 
 MongoClient.connect(MONGODB_URI, (err, mongoInstance) => {
@@ -46,6 +47,15 @@ module.exports = function makeDataHelpers() {
     getTweets: function(callback) {
       // const sortNewestFirst = (a, b) => a.created_at - b.created_at;
       db.collection("tweets").find().toArray(callback);
+    },
+
+    // Adds 1 like to the tweet
+    like: function(tweetId, callback) {
+      db.collection("tweets").findOneAndUpdate({_id: ObjectId(tweetId)}, {$inc: {likes: 1}}, callback);
+    },
+    // Removes 1 like to the tweet
+    unlike: function(tweetId, callback) {
+      db.collection("tweets").findOneAndUpdate({_id: ObjectId(tweetId)}, {$inc: {likes: -1}}, callback);
     }
   }
 };

@@ -1,0 +1,44 @@
+$primary-green: #00a087;
+
+#nav-bar {
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  background-color: $primary-green;
+  color: #e8fdff;
+  padding: 0 2em;
+  z-index: 1;
+
+  .logo {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    float: left;
+  }
+
+  .header {
+    margin: 10px;
+    float: left;
+    font-size: 2em;
+    line-height: 62px;
+  }
+}
+
+#button-container {
+  float: right;
+  margin: 10px;
+}
+
+#compose {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 60px;
+  width: 100px;
+  color: $primary-green;
+  background-color: #E7FDFF;
+}
+
+#compose:hover {
+  background-color: white;
+  color: black;
+}

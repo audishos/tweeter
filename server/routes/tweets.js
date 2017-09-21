@@ -29,6 +29,7 @@ module.exports = function(DataHelpers) {
       content: {
         text: req.body.text
       },
+      likes: 0,
       created_at: Date.now()
     };
 
@@ -39,6 +40,26 @@ module.exports = function(DataHelpers) {
         res.status(201).send();
       }
     });
+  });
+
+  tweetsRoutes.put("/:tweetId/like", (req, res) => {
+    DataHelpers.like(req.params.tweetId, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.status(200).send();
+      }
+    })
+  });
+
+  tweetsRoutes.put("/:tweetId/unlike", (req, res) => {
+    DataHelpers.unlike(req.params.tweetId, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.status(200).send();
+      }
+    })
   });
 
   return tweetsRoutes;
