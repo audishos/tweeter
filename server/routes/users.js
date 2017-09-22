@@ -37,7 +37,7 @@ module.exports = function(DataHelpers) {
           name: req.body["register-name"],
           handle: req.body["register-handle"],
           email: req.body["register-email"],
-          pass: bcrypt.hashSync(req.body["register-password"], 10),
+          password: bcrypt.hashSync(req.body["register-password"], 10),
           avatars: userHelper.generateRandomUser().avatars,
           likes: []
         }
