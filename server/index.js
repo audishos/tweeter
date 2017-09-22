@@ -7,9 +7,9 @@ const path = require('path');
 const PORT          = process.env.PORT || 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
-const sassMiddleware = require('node-sass-middleware');
-const bcrypt        = require("bcrypt");
+const sassMiddleware = require("node-sass-middleware");
 const app           = express();
+const cookieSession = require("cookie-session")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,6 +23,14 @@ app.use(sassMiddleware({
 }));
 
 app.use("/", express.static("public"));
+
+app.use(cookieSession({
+  name: "session",
+  keys: [
+    "b370de14e94142d4a108a79df6d0e265a0ba3fa2e10f57c4b3a892b74c9f84aa",
+    "26cb941323ef3be96a33e7dec1a6e8e4a9075e3f55b4eb818a292c6ad368f0e9"
+  ]
+}));
 
 // The `data-helpers` module provides an interface to the database of tweets.
 // This simple interface layer has a big benefit: we could switch out the
