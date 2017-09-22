@@ -93,8 +93,39 @@ function unlikeTweet(tweetId) {
 }
 
 function userLogin(loginCredentials) {
-  console.log(loginCredentials);
   $.post("/users/login", loginCredentials)
+  .done((data, code) => {
+    if (code === "success") {
+      $("#login-btn").hide();
+      $("#register-btn").hide();
+      $("#logout-btn").show();
+      $("#compose").show();
+      $("#login-form").slideUp();
+    } else {
+      $("#login-form form").append("<p>Login failed!</p>")
+    }
+  })
+  .fail((err) => {
+    $("#login-form form").append("<p>Login failed!</p>")
+  });
+}
+
+function userLogout() {
+  $.post("/users/logout")
+  .done((res) => {
+    $("#login-btn").show();
+    $("#register-btn").show();
+    $("#compose").hide();
+    $("#logout-btn").hide();
+    $("#new-tweet").slideUp();
+  })
+  .fail((err) => {
+    console.error(err);
+  });
+}
+
+function checkUserLoginStatus() {
+  $.get("/users/login")
   .done((res) => {
     // update UI
   })
@@ -147,6 +178,11 @@ $(document).ready(function() {
     $("#register-form input").first().focus();
   });
 
+  // event handler for the logout nav button
+  $("#logout-btn").on("click", (ev) => {
+    userLogout();
+  });
+
   // event handler for clicking like
   $("#tweet-container").on("click", ".fa-heart", (ev) => {
 
@@ -177,7 +213,7 @@ $(document).ready(function() {
     $("#login-form form p").remove();
 
     if (!user.val() || !pass.val()) {
-      $("#login-form form").append("<p>Please enter both an email address and a pasword!</p>")
+      $("#login-form form").append("<p>Please enter both an email address and a pasword!</p>");
     } else {
       const loginCredentials = $("#login-form form");
       userLogin(loginCredentials.serialize());

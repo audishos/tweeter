@@ -14,16 +14,25 @@ module.exports = function(DataHelpers) {
         res.status(404);
       } else {
         if (bcrypt.compareSync(req.body["login-password"], user.password)) {
-          res.status(200);
-          console.log("Am I here??");
           req.session.user_id = user._id;
-          res.redirect("/");
+          res.status(200).send();
         } else {
-          res.status(401)
+          res.status(401).send();
         }
       }
     })
   });
+
+  usersRoutes.post("/logout", (req, res) => {
+    req.session = null;
+    res.status(200).send();
+  });
+
+  // usersRoutes.get("/login", (req, res) => {
+  //   if (req.session.user_id) {
+  //     res.status
+  //   }
+  // });
 
   return usersRoutes;
 
