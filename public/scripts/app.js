@@ -134,6 +134,24 @@ function checkUserLoginStatus() {
   });
 }
 
+function userRegister(registerCredentials) {
+  $.post("/users/register")
+  .done((data, code) => {
+    if (code === "success") {
+      $("#login-btn").hide();
+      $("#register-btn").hide();
+      $("#logout-btn").show();
+      $("#compose").show();
+      $("#register-form").slideUp();
+    } else {
+      $("#register-form form").append("<p>Registration failed!</p>")
+    }
+  })
+  .fail((err) => {
+    $("#register-form form").append("<p>Registration failed!</p>")
+  });
+}
+
 $(document).ready(function() {
   loadTweets();
   const tweetTextArea = $("#new-tweet textarea");
@@ -204,7 +222,7 @@ $(document).ready(function() {
   });
 
   // event handler for the login form
-  $("#login-form .submit").on("click", (ev) => {
+  $("#login-form").on("submit", (ev) => {
     ev.preventDefault();
 
     const user = $("#login-form .form-input input").first();
@@ -219,6 +237,23 @@ $(document).ready(function() {
       userLogin(loginCredentials.serialize());
     }
 
+  });
+
+  // event handler for the registration form
+  $("#register-form").on("submit", (ev) => {
+    ev.preventDefault();
+
+    const name = $("#register-name").val();
+    const handle = $("#register-handle").val();
+    const email = $("#register-email").val();
+    const pass = $("#register-password").val();
+
+    if (!name || !handle || !email || !pass) {
+      $("#register-form form").append("<p>All of the above fields are mandatory!</p>");
+    } else {
+      const registerCredentials = $("#register-form form");
+      userRegister(registerCredentials.serialize());
+    }
 
   });
 
