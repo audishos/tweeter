@@ -115,7 +115,23 @@ $(document).ready(function() {
   // event handler for the compose button
   $("#compose").on("click", (ev) => {
     $("#new-tweet").slideToggle();
+    $("#login-form").slideUp();
+    $("#register-form").slideUp();
     tweetTextArea.focus();
+  });
+
+  $("#login-btn").on("click", (ev) => {
+    $("#login-form").slideToggle();
+    $("#new-tweet").slideUp();
+    $("#register-form").slideUp();
+    $("#login-form input").first().focus();
+  });
+
+  $("#register-btn").on("click", (ev) => {
+    $("#register-form").slideToggle();
+    $("#new-tweet").slideUp();
+    $("#login-form").slideUp();
+    $("#register-form input").first().focus();
   });
 
   // event handler for clicking like
