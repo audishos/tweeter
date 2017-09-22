@@ -11,18 +11,17 @@ const sassMiddleware = require('node-sass-middleware');
 const app           = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
 
 app.use(sassMiddleware({
   /* Options */
-  src: path.join(__dirname, '../styles'),
-  dest: path.join(__dirname, '../public/styles'),
+  src: path.join(__dirname, "../styles"),
+  dest: path.join(__dirname, "../public/styles"),
   debug: true,
-  outputStyle: 'expanded',
-  prefix:  '/styles'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+  outputStyle: "expanded",
+  prefix:  "/styles"  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
-app.use('/public', express.static(path.join(__dirname, '../public')));
+app.use("/", express.static("public"));
 
 // The in-memory database of tweets. It's a basic object with an array in it.
 const db = require("./lib/in-memory-db");
