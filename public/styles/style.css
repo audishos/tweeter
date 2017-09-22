@@ -4,10 +4,12 @@
 * Do not modify these two selectors, please
 */
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 *, *:before, *:after {
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 /*
 * Global layout stuff
@@ -16,7 +18,8 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
-  font-family: 'Roboto Condensed', sans-serif; }
+  font-family: 'Roboto Condensed', sans-serif;
+}
 
 /*
 * Additional CSS can be defined below or in other CSS files, as per instructions
@@ -29,7 +32,8 @@ main {
   padding: 80px 0 40px 0;
   /* text-align: center; */
   background-color: white;
-  /* margin-top: 140px; */ }
+  /* margin-top: 140px; */
+}
 
 #nav-bar {
   position: fixed;
@@ -38,125 +42,174 @@ main {
   background-color: #00a087;
   color: #e8fdff;
   padding: 0 2em;
-  z-index: 1; }
-  #nav-bar .logo {
-    width: 80px;
-    height: 80px;
-    margin: 10px;
-    float: left; }
-  #nav-bar .header {
-    margin: 10px;
-    float: left;
-    font-size: 2em;
-    line-height: 62px; }
+  z-index: 1;
+}
+
+#nav-bar .logo {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  float: left;
+}
+
+#nav-bar .header {
+  margin: 10px;
+  float: left;
+  font-size: 2em;
+  line-height: 62px;
+}
 
 #button-container {
   float: right;
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly; }
-  #button-container button {
-    border: 2px solid black;
-    border-radius: 5px;
-    height: 60px;
-    width: 100px;
-    color: #00a087;
-    background-color: #E7FDFF;
-    margin-left: 5px;
-    margin-right: 5px; }
-  #button-container button:hover {
-    background-color: white;
-    color: black; }
+  justify-content: space-evenly;
+}
 
-#new-tweet {
+#button-container button {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 60px;
+  width: 100px;
+  color: #00a087;
+  background-color: #E7FDFF;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#button-container button:hover {
+  background-color: white;
+  color: black;
+}
+
+.top-section {
   background-color: #eee;
   margin: 2em;
   overflow: auto;
   padding-bottom: 10px;
   border: 1px solid lightgray;
-  border-radius: 5px; }
-  #new-tweet h2 {
-    text-align: left;
-    border-bottom: 2px solid;
-    margin: 10px; }
-  #new-tweet textarea {
-    box-sizing: border-box;
-    width: 364px;
-    padding: 5px;
-    margin: 0 10px; }
-  #new-tweet input {
-    float: left;
-    margin: 0 10px; }
-  #new-tweet p {
-    clear: both;
-    color: red;
-    padding-left: 10px;
-    padding-top: 10px; }
-  #new-tweet .counter {
-    float: right;
-    margin: 0 10px;
-    font-style: italic; }
-  #new-tweet .invalid {
-    color: red; }
+  border-radius: 5px;
+}
+
+.top-section h2 {
+  text-align: left;
+  border-bottom: 2px solid;
+  margin: 10px;
+}
+
+.top-section textarea {
+  box-sizing: border-box;
+  width: 364px;
+  padding: 5px;
+  margin: 0 10px;
+}
+
+.top-section input {
+  float: left;
+  margin: 0 10px;
+}
+
+.top-section p {
+  clear: both;
+  color: red;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.top-section .counter {
+  float: right;
+  margin: 0 10px;
+  font-style: italic;
+}
+
+.top-section .invalid {
+  color: red;
+}
 
 .tweet {
   margin: 2em;
   overflow: auto;
   border: 1px solid lightgray;
-  border-radius: 5px; }
-  .tweet img {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-    border-radius: 5px;
-    float: left; }
-  .tweet header {
-    overflow: auto;
-    background-color: #eee; }
-  .tweet h2 {
-    color: #657E85;
-    text-align: left;
-    margin: 10px;
-    float: left; }
-  .tweet header span {
-    color: #BFBFBF;
-    float: right;
-    margin: 10px; }
-  .tweet article {
-    clear: both;
-    margin: 10px;
-    padding: 20px 0;
-    color: #234751; }
-  .tweet footer {
-    border-top: 1px solid lightgray;
-    color: #234751; }
-  .tweet footer span {
-    float: left;
-    margin: 10px; }
-  .tweet footer i {
-    float: right;
-    padding: 12px 5px;
-    color: #62C6B8; }
+  border-radius: 5px;
+}
+
+.tweet img {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border-radius: 5px;
+  float: left;
+}
+
+.tweet header {
+  overflow: auto;
+  background-color: #eee;
+}
+
+.tweet h2 {
+  color: #657E85;
+  text-align: left;
+  margin: 10px;
+  float: left;
+}
+
+.tweet header span {
+  color: #BFBFBF;
+  float: right;
+  margin: 10px;
+}
+
+.tweet article {
+  clear: both;
+  margin: 10px;
+  padding: 20px 0;
+  color: #234751;
+}
+
+.tweet footer {
+  border-top: 1px solid lightgray;
+  color: #234751;
+}
+
+.tweet footer span {
+  float: left;
+  margin: 10px;
+}
+
+.tweet footer i {
+  float: right;
+  padding: 12px 5px;
+  color: #62C6B8;
+}
 
 .icons {
   visibility: hidden;
-  float: right; }
+  float: right;
+}
 
 .tweet:hover {
-  border: 1px solid darkgrey; }
-  .tweet:hover h2 {
-    color: #234751; }
-  .tweet:hover header span {
-    color: #7C7C7C; }
-  .tweet:hover .icons {
-    visibility: visible; }
+  border: 1px solid darkgrey;
+}
+
+.tweet:hover h2 {
+  color: #234751;
+}
+
+.tweet:hover header span {
+  color: #7C7C7C;
+}
+
+.tweet:hover .icons {
+  visibility: visible;
+}
 
 .liked .fa-heart {
   visibility: visible;
-  color: deeppink; }
+  color: deeppink;
+}
+
 .liked .likes-counter {
   visibility: visible;
-  font-weight: bold; }
-
-/*# sourceMappingURL=style.css.map */
+  font-weight: bold;
+}
