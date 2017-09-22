@@ -92,6 +92,17 @@ function unlikeTweet(tweetId) {
   });
 }
 
+function userLogin(loginCredentials) {
+  console.log(loginCredentials);
+  $.post("/login", loginCredentials)
+  .done((res) => {
+    // update UI
+  })
+  .fail((err) => {
+    console.error(err);
+  });
+}
+
 $(document).ready(function() {
   loadTweets();
   const tweetTextArea = $("#new-tweet textarea");
@@ -112,7 +123,7 @@ $(document).ready(function() {
     }
   });
 
-  // event handler for the compose button
+  // event handler for the compose nav button
   $("#compose").on("click", (ev) => {
     $("#new-tweet").slideToggle();
     $("#login-form").slideUp();
@@ -120,6 +131,7 @@ $(document).ready(function() {
     tweetTextArea.focus();
   });
 
+  // event handler for the login nav button
   $("#login-btn").on("click", (ev) => {
     $("#login-form").slideToggle();
     $("#new-tweet").slideUp();
@@ -127,6 +139,7 @@ $(document).ready(function() {
     $("#login-form input").first().focus();
   });
 
+  // event handler for the register nav button
   $("#register-btn").on("click", (ev) => {
     $("#register-form").slideToggle();
     $("#new-tweet").slideUp();
@@ -151,6 +164,25 @@ $(document).ready(function() {
       selectedTweet.removeClass("liked");
       selectedLikesCounter.text(currentLikesCount - 1);
     }
+
+  });
+
+  // event handler for the login form
+  $("#login-form .submit").on("click", (ev) => {
+    ev.preventDefault();
+
+    const user = $("#login-form .form-input input").first();
+    const pass = $("#login-form .form-input input").last();
+
+    $("#login-form form p").remove();
+
+    if (!user.val() || !pass.val()) {
+      $("#login-form form").append("<p>Please enter both an email address and a pasword!</p>")
+    } else {
+      const loginCredentials = $("#login-form form");
+      userLogin(loginCredentials.serialize());
+    }
+
 
   });
 
