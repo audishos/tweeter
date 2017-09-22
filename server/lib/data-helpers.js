@@ -56,6 +56,10 @@ module.exports = function makeDataHelpers() {
     // Removes 1 like to the tweet
     unlike: function(tweetId, callback) {
       db.collection("tweets").findOneAndUpdate({_id: ObjectId(tweetId)}, {$inc: {likes: -1}}, callback);
+    },
+
+    findUserByEmail: function(email, callback) {
+      db.collection("users").findOne({ email: email }, callback);
     }
   }
 };

@@ -94,7 +94,7 @@ function unlikeTweet(tweetId) {
 
 function userLogin(loginCredentials) {
   console.log(loginCredentials);
-  $.post("/login", loginCredentials)
+  $.post("/users/login", loginCredentials)
   .done((res) => {
     // update UI
   })
