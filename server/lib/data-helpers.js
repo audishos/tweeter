@@ -4,7 +4,7 @@ let db; // globally scope the db
 
 const {MongoClient} = require("mongodb");
 const ObjectId = require("mongodb").ObjectID;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/tweeter"
 
 MongoClient.connect(MONGODB_URI, (err, mongoInstance) => {
   if (err) {
