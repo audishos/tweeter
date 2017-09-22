@@ -64,12 +64,33 @@ function submitTweet(newTweet) {
 // then sends them to renderTweets to be displayed
 function loadTweets() {
   $.get("/tweets")
-  .done((res) => {
+  .done((res, status, req) => {
+    const arr = req.getAllResponseHeaders().split('\r\n');
+    const headers = arr.reduce(function (acc, current, i){
+          var parts = current.split(': ');
+          acc[parts[0]] = parts[1];
+          return acc;
+    }, {});
+    renderElements(headers["x-logged-in"]);
     renderTweets(res);
   })
   .fail((err) => {
     console.error(err);
   });
+}
+
+function renderElements(loginStatus) {
+  if (loginStatus === "true") {
+    $("#login-btn").hide();
+    $("#register-btn").hide();
+    $("#logout-btn").show();
+    $("#compose").show();
+  } else {
+    $("#login-btn").show();
+    $("#register-btn").show();
+    $("#logout-btn").hide();
+    $("#compose").hide();
+  }
 }
 
 function likeTweet(tweetId) {
@@ -152,8 +173,19 @@ function userRegister(registerCredentials) {
   });
 }
 
+// function checkLoginStatus() {
+//   $.get("/login")
+//   .done((data, code) => {
+
+//   })
+//   .fail((err) => {
+
+//   });
+// }
+
 $(document).ready(function() {
   loadTweets();
+  // checkLoginStatus();
   const tweetTextArea = $("#new-tweet textarea");
 
   // event handler for the new tweet form

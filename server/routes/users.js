@@ -55,12 +55,6 @@ module.exports = function(DataHelpers) {
     })
   });
 
-  // usersRoutes.get("/login", (req, res) => {
-  //   if (req.session.user_id) {
-  //     res.status
-  //   }
-  // });
-
   return usersRoutes;
 
 }
