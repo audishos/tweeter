@@ -109,6 +109,15 @@ main {
   margin: 0 10px;
 }
 
+.top-section .form-input {
+  margin: 10px;
+}
+
+.top-section .form-input input {
+  float: right;
+  width: 250px;
+}
+
 .top-section p {
   clear: both;
   color: red;

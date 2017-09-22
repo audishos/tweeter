@@ -24,6 +24,15 @@
     margin: 0 10px;
   }
 
+  .form-input {
+    margin: 10px;
+
+    input {
+      float: right;
+      width: 250px;
+    }
+  }
+
   p {
     clear: both;
     color: red;
