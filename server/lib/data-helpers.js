@@ -60,6 +60,10 @@ module.exports = function makeDataHelpers() {
 
     findUserByEmail: function(email, callback) {
       db.collection("users").findOne({ email: email }, callback);
+    },
+
+    createUser: function(user, callback) {
+      db.collection("users").insertOne(user, callback);
     }
   }
 };

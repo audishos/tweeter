@@ -135,7 +135,7 @@ function checkUserLoginStatus() {
 }
 
 function userRegister(registerCredentials) {
-  $.post("/users/register")
+  $.post("/users/register", registerCredentials)
   .done((data, code) => {
     if (code === "success") {
       $("#login-btn").hide();
