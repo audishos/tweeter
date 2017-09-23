@@ -58,6 +58,10 @@ module.exports = function makeDataHelpers() {
       db.collection("tweets").findOneAndUpdate({_id: ObjectId(tweetId)}, {$inc: {likes: -1}}, callback);
     },
 
+    findUserById: function(userId, callback) {
+      db.collection("users").findOne({ _id: ObjectId(userId) }, callback);
+    },
+
     findUserByEmail: function(email, callback) {
       db.collection("users").findOne({ email: email }, callback);
     },

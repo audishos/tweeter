@@ -64,14 +64,7 @@ function submitTweet(newTweet) {
 // then sends them to renderTweets to be displayed
 function loadTweets() {
   $.get("/tweets")
-  .done((res, status, req) => {
-    const arr = req.getAllResponseHeaders().split('\r\n');
-    const headers = arr.reduce(function (acc, current, i){
-          var parts = current.split(': ');
-          acc[parts[0]] = parts[1];
-          return acc;
-    }, {});
-    renderElements(headers["x-logged-in"]);
+  .done((res) => {
     renderTweets(res);
   })
   .fail((err) => {
@@ -80,7 +73,7 @@ function loadTweets() {
 }
 
 function renderElements(loginStatus) {
-  if (loginStatus === "true") {
+  if (loginStatus === true) {
     $("#login-btn").hide();
     $("#register-btn").hide();
     $("#logout-btn").show();
@@ -145,16 +138,6 @@ function userLogout() {
   });
 }
 
-function checkUserLoginStatus() {
-  $.get("/users/login")
-  .done((res) => {
-    // update UI
-  })
-  .fail((err) => {
-    console.error(err);
-  });
-}
-
 function userRegister(registerCredentials) {
   $.post("/users/register", registerCredentials)
   .done((data, code) => {
@@ -173,18 +156,24 @@ function userRegister(registerCredentials) {
   });
 }
 
-// function checkLoginStatus() {
-//   $.get("/login")
-//   .done((data, code) => {
-
-//   })
-//   .fail((err) => {
-
-//   });
-// }
+function loadPageElements() {
+  $.get("/users/login")
+  .done((data, code) => {
+    if (code === "success") {
+      renderElements(data);
+    } else {
+      console.warn(code);
+    }
+  })
+  .fail((err) => {
+    console.error(err);
+  });
+}
 
 $(document).ready(function() {
   loadTweets();
+  loadPageElements();
+
   // checkLoginStatus();
   const tweetTextArea = $("#new-tweet textarea");
 

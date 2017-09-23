@@ -8,6 +8,24 @@ const userHelper    = require("../lib/util/user-helper")
 
 module.exports = function(DataHelpers) {
 
+  usersRoutes.get("/login", (req, res) => {
+    if (req.session.user_id) {
+      DataHelpers.findUserById(req.session.user_id, (err, user) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send(err);
+        } else if (!user) {
+          req.session = null;
+          res.status(200).send(false);
+        } else {
+          res.status(200).send(true);
+        }
+      });
+    } else {
+      res.status(200).send(false);
+    }
+  }),
+
   usersRoutes.post("/login", (req, res) => {
     DataHelpers.findUserByEmail(req.body["login-email"], (err, user) => {
       if (err) {

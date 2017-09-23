@@ -32,8 +32,8 @@ app.use(cookieSession({
   ]
 }));
 
-const addLoginStatus = require("./lib/header-middleware.js");
-app.use(addLoginStatus);
+// const addLoginStatus = require("./lib/header-middleware.js");
+// app.use(addLoginStatus);
 
 // The `data-helpers` module provides an interface to the database of tweets.
 // This simple interface layer has a big benefit: we could switch out the
