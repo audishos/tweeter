@@ -53,7 +53,7 @@ module.exports = function(DataHelpers) {
       if (!existingUser) {
         const newUser = {
           name: req.body["register-name"],
-          handle: req.body["register-handle"],
+          handle: "@" + req.body["register-handle"],
           email: req.body["register-email"],
           password: bcrypt.hashSync(req.body["register-password"], 10),
           avatars: userHelper.generateRandomUser().avatars,
