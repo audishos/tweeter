@@ -47,4 +47,39 @@ $primary-green: #00a087;
     color: black;
   }
 
+
+}
+
+#login-btn {
+  display: inline;
+}
+
+#register-btn {
+  display: inline;
+}
+
+#compose {
+  display: none;
+}
+
+#logout-btn {
+  display: none;
+}
+
+.authenticated {
+  #login-btn {
+    display: none;
+  }
+
+  #register-btn {
+    display: none;
+  }
+
+  #compose {
+    display: inline;
+  }
+
+  #logout-btn {
+    display: inline;
+  }
 }

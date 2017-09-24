@@ -74,15 +74,11 @@ function loadTweets() {
 
 function renderElements(loginStatus) {
   if (loginStatus === true) {
-    $("#login-btn").hide();
-    $("#register-btn").hide();
-    $("#logout-btn").show();
-    $("#compose").show();
+    document.querySelector("#button-container").className += "authenticated";
+    document.querySelector("#tweet-container").className += "authenticated";
   } else {
-    $("#login-btn").show();
-    $("#register-btn").show();
-    $("#logout-btn").hide();
-    $("#compose").hide();
+    document.querySelector("#button-container").classList.remove("authenticated");
+    document.querySelector("#tweet-container").classList.remove("authenticated");
   }
 }
 
@@ -110,10 +106,7 @@ function userLogin(loginCredentials) {
   $.post("/users/login", loginCredentials)
   .done((data, code) => {
     if (code === "success") {
-      $("#login-btn").hide();
-      $("#register-btn").hide();
-      $("#logout-btn").show();
-      $("#compose").show();
+      renderElements(true);
       $("#login-form").slideUp();
     } else {
       $("#login-form form").append("<p>Login failed!</p>")
@@ -127,10 +120,7 @@ function userLogin(loginCredentials) {
 function userLogout() {
   $.post("/users/logout")
   .done((res) => {
-    $("#login-btn").show();
-    $("#register-btn").show();
-    $("#compose").hide();
-    $("#logout-btn").hide();
+    renderElements(false);
     $("#new-tweet").slideUp();
   })
   .fail((err) => {
@@ -142,10 +132,7 @@ function userRegister(registerCredentials) {
   $.post("/users/register", registerCredentials)
   .done((data, code) => {
     if (code === "success") {
-      $("#login-btn").hide();
-      $("#register-btn").hide();
-      $("#logout-btn").show();
-      $("#compose").show();
+      renderElements(true);
       $("#register-form").slideUp();
     } else {
       $("#register-form form").append("<p>Registration failed!</p>")

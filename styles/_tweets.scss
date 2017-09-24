@@ -56,11 +56,13 @@
 
 
 .icons {
-  visibility: hidden;
   float: right;
+  i {
+    visibility: hidden;
+  }
 }
 
-.tweet:hover {
+.authenticated .tweet:hover {
   border: 1px solid darkgrey;
 
   h2 {
@@ -71,7 +73,7 @@
     color: #7C7C7C;
   }
 
-  .icons {
+  .icons i {
     visibility: visible;
   }
 }

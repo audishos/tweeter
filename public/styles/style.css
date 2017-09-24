@@ -83,6 +83,38 @@ main {
   color: black;
 }
 
+#login-btn {
+  display: inline;
+}
+
+#register-btn {
+  display: inline;
+}
+
+#compose {
+  display: none;
+}
+
+#logout-btn {
+  display: none;
+}
+
+.authenticated #login-btn {
+  display: none;
+}
+
+.authenticated #register-btn {
+  display: none;
+}
+
+.authenticated #compose {
+  display: inline;
+}
+
+.authenticated #logout-btn {
+  display: inline;
+}
+
 .top-section {
   background-color: #eee;
   margin: 2em;
@@ -192,23 +224,26 @@ main {
 }
 
 .icons {
-  visibility: hidden;
   float: right;
 }
 
-.tweet:hover {
+.icons i {
+  visibility: hidden;
+}
+
+.authenticated .tweet:hover {
   border: 1px solid darkgrey;
 }
 
-.tweet:hover h2 {
+.authenticated .tweet:hover h2 {
   color: #234751;
 }
 
-.tweet:hover header span {
+.authenticated .tweet:hover header span {
   color: #7C7C7C;
 }
 
-.tweet:hover .icons {
+.authenticated .tweet:hover .icons i {
   visibility: visible;
 }
 
