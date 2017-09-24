@@ -1,5 +1,12 @@
+#tweet-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
 .tweet {
-  margin: 2em;
+  width: 300px;
+  margin: 16px;
   overflow: auto;
   border: 1px solid lightgray;
   border-radius: 5px;
