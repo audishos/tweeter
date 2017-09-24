@@ -48,7 +48,7 @@ module.exports = function(DataHelpers) {
   });
 
   tweetsRoutes.put("/:tweetId/like", (req, res) => {
-    DataHelpers.like(req.params.tweetId, (err) => {
+    DataHelpers.like(req.params.tweetId, req.session.user_id, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
@@ -58,7 +58,7 @@ module.exports = function(DataHelpers) {
   });
 
   tweetsRoutes.put("/:tweetId/unlike", (req, res) => {
-    DataHelpers.unlike(req.params.tweetId, (err) => {
+    DataHelpers.unlike(req.params.tweetId, req.session.user_id, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {

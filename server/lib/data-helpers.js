@@ -50,12 +50,14 @@ module.exports = function makeDataHelpers() {
     },
 
     // Adds 1 like to the tweet
-    like: function(tweetId, callback) {
+    like: function(tweetId, userId, callback) {
       db.collection("tweets").findOneAndUpdate({_id: ObjectId(tweetId)}, {$inc: {likes: 1}}, callback);
+      db.collection("users").findOneAndUpdate({_id: ObjectId(userId)}, {$push: {likes: tweetId}});
     },
     // Removes 1 like to the tweet
-    unlike: function(tweetId, callback) {
+    unlike: function(tweetId, userId, callback) {
       db.collection("tweets").findOneAndUpdate({_id: ObjectId(tweetId)}, {$inc: {likes: -1}}, callback);
+      db.collection("users").findOneAndUpdate({_id: ObjectId(userId)}, {$pop: {likes: tweetId}});
     },
 
     findUserById: function(userId, callback) {
