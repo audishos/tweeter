@@ -1,7 +1,7 @@
 "use strict";
 
-const dotenv = require('dotenv').config();
-const path = require('path');
+const dotenv = require("dotenv").config();
+const path = require("path");
 // Basic express setup:
 
 const PORT          = process.env.PORT || 8080;
@@ -9,7 +9,7 @@ const express       = require("express");
 const bodyParser    = require("body-parser");
 const sassMiddleware = require("node-sass-middleware");
 const app           = express();
-const cookieSession = require("cookie-session")
+const cookieSession = require("cookie-session");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

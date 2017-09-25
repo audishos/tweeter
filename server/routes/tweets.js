@@ -1,8 +1,8 @@
 "use strict";
 
-const userHelper    = require("../lib/util/user-helper")
+const userHelper    = require("../lib/util/user-helper");
 
-const express       = require('express');
+const express       = require("express");
 const tweetsRoutes  = express.Router();
 
 module.exports = function(DataHelpers) {
@@ -19,13 +19,12 @@ module.exports = function(DataHelpers) {
 
   tweetsRoutes.post("/", function(req, res) {
     if (!req.body.text) {
-      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      res.status(400).json({ error: "invalid request: no data in POST body"});
       return;
     }
 
-    let user = null;
     if (req.session.user_id) {
-      user = DataHelpers.findUserById(req.session.user_id, (err, user) => {
+      DataHelpers.findUserById(req.session.user_id, (err, user) => {
         user =  user ? user : userHelper.generateRandomUser();
         const tweet = {
           user: user,
@@ -34,7 +33,7 @@ module.exports = function(DataHelpers) {
           },
           likes: 0,
           created_at: Date.now()
-        }
+        };
         DataHelpers.saveTweet(tweet, (err) => {
           if (err) {
             res.status(500).json({ error: err.message });
@@ -43,7 +42,7 @@ module.exports = function(DataHelpers) {
           }
         });
       });
-    };
+    }
 
   });
 
@@ -54,7 +53,7 @@ module.exports = function(DataHelpers) {
       } else {
         res.status(200).send();
       }
-    })
+    });
   });
 
   tweetsRoutes.put("/:tweetId/unlike", (req, res) => {
@@ -64,9 +63,9 @@ module.exports = function(DataHelpers) {
       } else {
         res.status(200).send();
       }
-    })
+    });
   });
 
   return tweetsRoutes;
 
-}
+};

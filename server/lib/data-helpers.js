@@ -4,7 +4,7 @@ let db; // globally scope the db
 
 const {MongoClient} = require("mongodb");
 const ObjectId = require("mongodb").ObjectID;
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/tweeter"
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/tweeter";
 
 MongoClient.connect(MONGODB_URI, (err, mongoInstance) => {
   if (err) {
@@ -31,8 +31,8 @@ function gracefulShutdown() {
   }
 }
 
-process.on('SIGTERM', gracefulShutdown); // listen for TERM signal .e.g. kill
-process.on('SIGINT', gracefulShutdown);  // listen for INT signal e.g. Ctrl-C
+process.on("SIGTERM", gracefulShutdown); // listen for TERM signal .e.g. kill
+process.on("SIGINT", gracefulShutdown);  // listen for INT signal e.g. Ctrl-C
 
 // Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = function makeDataHelpers() {
@@ -71,5 +71,5 @@ module.exports = function makeDataHelpers() {
     createUser: function(user, callback) {
       db.collection("users").insertOne(user, callback);
     }
-  }
+  };
 };

@@ -3,7 +3,7 @@
 const express       = require("express");
 const usersRoutes   = express.Router();
 const bcrypt        = require("bcrypt");
-const userHelper    = require("../lib/util/user-helper")
+const userHelper    = require("../lib/util/user-helper");
 
 
 module.exports = function(DataHelpers) {
@@ -12,8 +12,8 @@ module.exports = function(DataHelpers) {
     if (req.session.user_id) {
       DataHelpers.findUserById(req.session.user_id, (err, user) => {
         if (err) {
-          console.error(err);
           res.status(500).send(err);
+          throw err;
         } else if (!user) {
           req.session = null;
           res.status(200).send(false);
@@ -40,7 +40,7 @@ module.exports = function(DataHelpers) {
           res.status(401).send();
         }
       }
-    })
+    });
   });
 
   usersRoutes.post("/logout", (req, res) => {
@@ -58,7 +58,7 @@ module.exports = function(DataHelpers) {
           password: bcrypt.hashSync(req.body["register-password"], 10),
           avatars: userHelper.generateRandomUser().avatars,
           likes: []
-        }
+        };
         DataHelpers.createUser(newUser, (err, dbRes) => {
           if (err) {
             res.status(500).json({ error: err.message });
@@ -70,9 +70,9 @@ module.exports = function(DataHelpers) {
       } else {
         res.status(409).send();
       }
-    })
+    });
   });
 
   return usersRoutes;
 
-}
+};
