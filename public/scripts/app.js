@@ -14,9 +14,9 @@ function escape(str) {
 }
 
 // generates the html for a tweet object and returns it
-function createTweetElement(tweetData) {
+function createTweetElement(tweetData, user) {
   return (
-    `<article class="tweet" data-tweet-id="${tweetData._id}">
+    `<article class="tweet${user && user.likes.indexOf(tweetData._id) >= 0 ? " liked" : ""}" data-tweet-id="${tweetData._id}">
       <header>
         <img class="avatar" src="${tweetData.user.avatars.regular}">
         <h2>${tweetData.user.name}</h2>
@@ -41,8 +41,12 @@ function createTweetElement(tweetData) {
 // iterates through an array of tweets,
 // sending them to the createTweetElement function,
 // then appends it to the #tweet container on the page
-function renderTweets(tweets) {
-  let tweetsStr = tweets.reverse().map(createTweetElement).join('');
+function renderTweets(tweets, user) {
+  tweets = tweets.reverse();
+  let tweetsStr = "";
+  for (tweet of tweets) {
+    tweetsStr += createTweetElement(tweet, user);
+  }
   $("#tweet-container").empty();
   $("#tweet-container").prepend($(tweetsStr));
 }
@@ -62,10 +66,10 @@ function submitTweet(newTweet) {
 
 // GETs the tweets from the /tweets route,
 // then sends them to renderTweets to be displayed
-function loadTweets() {
+function loadTweets(user) {
   $.get("/tweets")
   .done((res) => {
-    renderTweets(res);
+    renderTweets(res, user);
   })
   .fail((err) => {
     console.error(err);
@@ -145,9 +149,15 @@ function userRegister(registerCredentials) {
 
 function loadPageElements() {
   $.get("/users/login")
-  .done((data, code) => {
+  .done((user, code) => {
     if (code === "success") {
-      renderElements(data);
+      if (user) {
+        renderElements(true);
+      } else {
+        renderElements(false);
+      }
+
+      loadTweets(user);
     } else {
       console.warn(code);
     }
@@ -158,7 +168,7 @@ function loadPageElements() {
 }
 
 $(document).ready(function() {
-  loadTweets();
+  //loadTweets();
   loadPageElements();
 
   // checkLoginStatus();

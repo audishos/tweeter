@@ -18,7 +18,7 @@ module.exports = function(DataHelpers) {
           req.session = null;
           res.status(200).send(false);
         } else {
-          res.status(200).send(true);
+          res.status(200).send(user);
         }
       });
     } else {

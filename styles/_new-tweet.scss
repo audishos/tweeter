@@ -1,6 +1,7 @@
 .top-section {
+  width: 300px;
   background-color: #eee;
-  margin: 2em;
+  margin: 16px;
   overflow: auto;
   padding-bottom: 10px;
   border: 1px solid lightgray;
@@ -14,7 +15,7 @@
 
   textarea {
     box-sizing: border-box;
-    width: 364px;
+    width: 278px;
     padding: 5px;
     margin: 0 10px;
   }
@@ -29,7 +30,7 @@
 
     input {
       float: right;
-      width: 250px;
+      width: 190px;
     }
   }
 
