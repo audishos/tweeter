@@ -6,16 +6,16 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## What's been added?
 
-- Tweets
--- The ability to compose and submit a tweet
--- The ability to like tweets
--- Persistance: Tweets and likes are saved to MongoDB and are reloaded whenever the app is restarted
+### Tweets
+- The ability to compose and submit a tweet
+- The ability to like tweets
+- Persistance: Tweets and likes are saved to MongoDB and are reloaded whenever the app is restarted
 
-- Users
--- User registration
--- User login
--- Only logged in users can tweet
--- Only logged in users can like tweets
+### Users
+- User registration
+- User login
+- Only logged in users can tweet
+- Only logged in users can like tweets
 
 ## Getting Started
 
